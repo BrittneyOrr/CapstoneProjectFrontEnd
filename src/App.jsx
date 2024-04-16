@@ -19,6 +19,7 @@ function App() {
       </div>
      
       <div>
+<<<<<<< HEAD
         <Routes>
           <Route path='/' element={<Movies />} />
           <Route path='/login' element={<login />} />
@@ -26,6 +27,10 @@ function App() {
         </Routes>
       </div>
       
+=======
+        <h1> Hello Movie Review App 🧾</h1>
+      </div>
+>>>>>>> e2ab543ce3d6cad7e837a45fddc73563c312be01
     </>
   )
 }
