@@ -1,54 +1,54 @@
 // setup the homepage to display the movies
-import { useState, useEffect } from 'react';
-import { useNavigate}
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAllMovies } from '../api';
 
 export default function AllMovies () {
     const [movies, setMovies] = useState([]);
-    // const navigate = useNavigate();
-    // const [error, setError] = useState(null);
-    // const isLoading, setIsLoading] = useState(false);
-    // useEffect(() => {
-    //     async function getAllMoviesHandler() {
-    //         try {
-    //             const moviesData = await getAllMovies();
-    //             setIsLoading(true);
-    //             setMovies(moviesData);
-    //         } catch (error) {
-    //             setIsLoading(false);
-    //             setError(error);
-    //         }
-    //     }
-    //     getAllMoviesHandler();
-    // if (error) {
-    //     return <p>Error: {error.message}</p>;
-    // } else if (!isLoading) {
-    //     return <p>Loading...</p>;
-    // } else {
-    //     return (
-    //         <div className='movie-container'>
-    //         <ul>
-    //         {movies.map((movie) => {
-    //             const { id, title, imageUrl, plot, category, releaseDate } = movie;
-    //             return (
-    //                 <li key={id}>
-    //                     <ul>
-    //                         <img src={imageUrl} alt = {title} />
-    //                         <li>Title: {title}</li>
-    //                         <li>Plot: {plot}</li>
-    //                         <li>Category: {category}</li>
-    //                         <li><button onClick={() => navigate(`/movies/:id}`)} className='button'>See Details</button></li>
-    //                         <li>Release Date: {releaseDate}</li>
-    //                     </ul>
-    //                 </li>
-    //             );
-    //         })}
-    //         </ul>
-    //         </div>
-    //     )
-    // }
-    // })
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        async function getAllMoviesHandler() {
+            try {
+                const moviesData = await getAllMovies();
+                setMovies(moviesData);
+                setIsLoading(false);
+            } catch (error) {
+                setError(error);
+                setIsLoading(false);
+            }
+        }
+        getAllMoviesHandler();
+    }, []);
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }if (error) {
+        return <p>Error: {error.message}</p>;
+    }
     return (
-        <h1>Movie Reviews</h1>
-        
-    )
-};
+        <div className='movie-container'>
+            <h1>Movie Reviews</h1>
+            <ul className="noBulletPoints">
+            {movies.map((movie) => {
+                const { id, title, imageUrl, plot, category, releaseDate } = movie;
+                return (
+                    <li key={id} className="movieCard">
+                            <p> </p>
+                            <img src={imageUrl} alt = {title}  className="thumbnail" />
+                            <p>Title: {title}</p>
+                            <p>Category: {category}</p>
+                            <p>Release Date: {releaseDate}</p>
+                            <p> </p>
+                            <li><button onClick={() => navigate(`/movies/:id}`)} className='button'>See Details</button></li>
+                            <p> </p>
+                            </li>
+                            );
+                        })}
+                        </ul>
+                        </div>
+                        );
+                    }
+// took plot out of the card so that it could be on single movie page
+// <li>Plot: {plot}</li>

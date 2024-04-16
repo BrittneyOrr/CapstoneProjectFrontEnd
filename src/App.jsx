@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { Routes, Route, Link, Router } from 'react-router-dom';
 import './App.css'
 import Movies from './components/Movies';
 
@@ -8,10 +8,16 @@ function App() {
 
   return (
     <>
-      <div>
-        <Movies />
+
+      <div id="container">
+        <Link to='/'>Movies</Link>
       </div>
      
+      <div>
+        <Routes>
+          <Route path='/' element={<Movies />} />
+        </Routes>
+      </div>
       
     </>
   )
