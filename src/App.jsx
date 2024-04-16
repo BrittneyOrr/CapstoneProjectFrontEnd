@@ -1,33 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState } from 'react';
+import { Routes, Route, Link, Router } from 'react-router-dom';
 import './App.css'
+import Movies from './components/Movies';
+import login from './components/login';
+import register from './components/register';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [] = useState()
 
   return (
     <>
+
+      <div id="container">
+        <Link to='/'>Movies</Link>
+        <Link to='/login'>Login</Link>
+        <Link to='/register'>Register</Link>
+
+      </div>
+     
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+<<<<<<< HEAD
+        <Routes>
+          <Route path='/' element={<Movies />} />
+          <Route path='/login' element={<login />} />
+          <Route path='/register' element={<register />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      
+=======
+        <h1> Hello Movie Review App 🧾</h1>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+>>>>>>> e2ab543ce3d6cad7e837a45fddc73563c312be01
     </>
   )
 }
