@@ -70,3 +70,10 @@ button:focus-visible {
   border: white solid;
 }
 
+#container {
+  font-size: x-large;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  width: 400px;
+}

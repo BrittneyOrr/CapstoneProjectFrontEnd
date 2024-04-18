@@ -2,14 +2,14 @@
 // is this needed? -> const API_URL = 'https://';
 
 // export const getAllMovies = async () => {
-    // try {
-    //     // const result = await fetch('https://')
-    //     // const response = await result.json()
-    //     // console.log(response.movies)
-    //     // return response.movies
-    // } catch(error) {
-    //     console.log(error);
-    // }
+//     try {
+//         const result = await fetch('https://localhost:5432')
+//         const response = await result.json()
+//         console.log(response.movies)
+//         return response.movies
+//     } catch(error) {
+//         console.log(error);
+//     }
     export const getAllMovies = async () => {
         try {
             const result = { 

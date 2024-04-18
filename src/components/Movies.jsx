@@ -41,7 +41,7 @@ export default function AllMovies () {
                             <p>Category: {category}</p>
                             <p>Release Date: {releaseDate}</p>
                             <p> </p>
-                            <li><button onClick={() => navigate(`/movies/:id}`)} className='button'>See Details</button></li>
+                            <p><button onClick={() => navigate(`/movies/:id}`)} className='button'>See Details</button></p>
                             <p> </p>
                             </li>
                             );
