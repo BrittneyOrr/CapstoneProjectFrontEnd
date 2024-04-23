@@ -20,7 +20,7 @@ a {
   
 }
 a:hover {
-  color: #962806;
+  color: aqua;
 }
 
 body {
@@ -50,7 +50,8 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #0e17c5;
+  border-color: aqua;
+  background-color: aqua;
 }
 button:focus,
 button:focus-visible {
@@ -76,4 +77,8 @@ button:focus-visible {
   justify-content: space-between; 
   align-items: center;
   width: 400px;
+}
+
+.ReviewForm {
+  border : 2px solid aqua
 }

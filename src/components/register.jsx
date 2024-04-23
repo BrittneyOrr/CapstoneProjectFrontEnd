@@ -12,10 +12,10 @@ export default function RegisterUser(user) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        if (password!== confirmPassword) {
-            setError('Passwords do not match');
-            return;
-        }
+        // if (password!== confirmPassword) {
+        //     setError('Passwords do not match');
+        //     return;
+        // }
         setIsLoading(true);
         try {
             const response = await fetch('/api/register', {
@@ -71,8 +71,9 @@ export default function RegisterUser(user) {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        </label>
+                    </label>
                         <p> </p>
+
                     <button type='submit'> Register</button>
                     {error && <p>{error}    </p>}
             </form>

@@ -38,3 +38,31 @@
             throw new Error("Failed to fetch movies");
         }
     };
+
+    export const fetchMovie = async (id) => {
+        try {
+            const result = await fetch(`/api/movie/${id}`); // Interpolate id into URL
+            if (!result.ok) {
+                throw new Error('Failed to fetch movie');
+            }
+            const response = await result.json();
+            return response.movie;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Failed to fetch movie");
+        }
+    };
+    
+    export const fetchReviews = async () => {
+        try {
+            const result = await fetch('/api/reviews');
+            if (!result.ok) {
+                throw new Error('Failed to fetch reviews');
+            }
+            const response = await result.json();
+            return response.reviews;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Failed to fetch reviews");
+        }
+    }

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllMovies } from '../api';
+import ReviewForm from './ReviewForm';
+
 
 export default function AllMovies () {
     const [movies, setMovies] = useState([]);
@@ -41,7 +43,9 @@ export default function AllMovies () {
                             <p>Category: {category}</p>
                             <p>Release Date: {releaseDate}</p>
                             <p> </p>
-                            <p><button onClick={() => navigate(`/movies/:id}`)} className='button'>See Details</button></p>
+                            <p><button onClick={() => navigate(`/api/movies/${id}`)} className='button'>See Details</button></p>
+                            <ReviewForm movieId={id} />
+
                             <p> </p>
                             </li>
                             );
@@ -52,3 +56,4 @@ export default function AllMovies () {
                     }
 // took plot out of the card so that it could be on single movie page
 // <li>Plot: {plot}</li>
+// { token ? <ReviewForm movieId={id} /> : null }
