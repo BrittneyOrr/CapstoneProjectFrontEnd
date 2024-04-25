@@ -45,6 +45,7 @@ const Movie = () => {
                     <h2>{movie.category}</h2>
                     <h2>{movie.release_date}</h2>
                     <h2>{movie.plot}</h2>
+                    <h2>Trial</h2>
                     <h2>Average Rating: {calculateAverageRating()}</h2>
                     { token ? <ReviewForm movieId={id} /> : null }                
                 </div>
