@@ -13,21 +13,43 @@ function App() {
   const [token, setToken] = useState(null)
   return (
     <>
-      <div id="container">
-        <Link to='/'>Movies</Link>
+      <div class="container">
 
-        <Link to='/login'>Login</Link>
-        <Link to='/register'>Register</Link>
-        <Link to='/account'>Account</Link>
-      </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <Link class="navbar-brand" to='/'>Movies</Link>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <Link class="nav-link" to='/login'>Sign In</Link>
+                </li>
+
+                <li class="nav-item">
+                    <Link class="nav-link" to='/register'>Create Account</Link>
+                </li>
+
+                <li class="nav-item">
+                    <Link class="nav-link" to='/users/me'>Account</Link>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
      
       <div>
         <Routes>
           <Route path='/' element={<Movies />} />
-          <Route path='/api/movies/${id}' element={<SingleMovie />} />
+          <Route path='/movies/:movieId' element={<SingleMovie />} />
           <Route path='/login' element={<Login setToken={setToken} />} />
           <Route path='/register' element={<Register setToken={setToken} />} />
-          <Route path='/account' element={<Account token={token} />} />
+          <Route path='/users/me' element={<Account token={token} />} />
         </Routes>
       </div>
     </>

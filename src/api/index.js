@@ -1,5 +1,7 @@
 // setup the API CRUD to pull movies
 // is this needed? -> const API_URL = 'https://';
+//DO WE NEED TO DEPLOY TO GET OUR BASE URL?
+// const API_URL = "https://localhost:5432";
 
 export const getAllMovies = async () => {
     try {
@@ -15,6 +17,23 @@ export const getAllMovies = async () => {
         throw error; // Re-throw the error to propagate it further
     }
 };
+
+export const getSingleMovie = async (movieId) => {
+    try {
+        //NEED TO FIX THE API URL WHEN WE GET IT FIGURED OUT
+        const result = await fetch(`http://localhost:3000/api/movies/${movieId}`);
+        // const result = await fetch(`${API_URL}/${movieId}`);
+        const response = await result.json();
+        console.log(response.movie);
+        return response.movie;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+};
+
+
 
     // export const getAllMovies = async () => {
     //     try {
