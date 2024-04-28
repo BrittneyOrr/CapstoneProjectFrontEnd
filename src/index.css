@@ -1,26 +1,26 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* line-height: 1.5; */
+  /* font-weight: 400; */
 
-  color-scheme: light dark;
+  /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #242424; */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* font-synthesis: none; */
+  /* text-rendering: optimizeLegibility; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
 }
 
-a {
+/* a {
   font-weight: 500;
   color: white;
   text-decoration: inherit;
   
 }
 a:hover {
-  color: #962806;
+  color: aqua;
 }
 
 body {
@@ -50,7 +50,8 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #0e17c5;
+  border-color: aqua;
+  background-color: aqua;
 }
 button:focus,
 button:focus-visible {
@@ -58,9 +59,9 @@ button:focus-visible {
 }
 
 .thumbnail {
-  width: 150px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-}
+  width: 150px; 
+   height: auto;  
+}  
 
 .noBulletPoints {
   list-style-type: none
@@ -70,3 +71,14 @@ button:focus-visible {
   border: white solid;
 }
 
+#container {
+  font-size: x-large;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  width: 400px;
+}
+
+.ReviewForm {
+  border : 2px solid aqua
+}  */

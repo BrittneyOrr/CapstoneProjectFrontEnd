@@ -1,38 +1,59 @@
-import React, { useState } from 'react';
-import { Routes, Route, Link, Router } from 'react-router-dom';
-import './App.css'
+import React from 'react';
+import { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import './index.css';
 import Movies from './components/Movies';
-import login from './components/login';
-import register from './components/register';
+import SingleMovie from './components/SingleMovie';
+import Login from './components/Login';
+import Register from './components/Register';
+import Account from './components/Account';
 
 function App() {
-  const [] = useState()
-
+  const [token, setToken] = useState(null)
   return (
     <>
+      <div class="container">
 
-      <div id="container">
-        <Link to='/'>Movies</Link>
-        <Link to='/login'>Login</Link>
-        <Link to='/register'>Register</Link>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <Link class="navbar-brand" to='/'>Movies</Link>
 
-      </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <Link class="nav-link" to='/login'>Sign In</Link>
+                </li>
+
+                <li class="nav-item">
+                    <Link class="nav-link" to='/register'>Create Account</Link>
+                </li>
+
+                <li class="nav-item">
+                    <Link class="nav-link" to='/users/me'>Account</Link>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
      
       <div>
-<<<<<<< HEAD
         <Routes>
           <Route path='/' element={<Movies />} />
-          <Route path='/login' element={<login />} />
-          <Route path='/register' element={<register />} />
+          <Route path='/movies/:movieId' element={<SingleMovie />} />
+          <Route path='/login' element={<Login setToken={setToken} />} />
+          <Route path='/register' element={<Register setToken={setToken} />} />
+          <Route path='/users/me' element={<Account token={token} />} />
         </Routes>
       </div>
-      
-=======
-        <h1> Hello Movie Review App 🧾</h1>
-      </div>
->>>>>>> e2ab543ce3d6cad7e837a45fddc73563c312be01
     </>
-  )
+  );
 }
 
-export default App
+export default App;
