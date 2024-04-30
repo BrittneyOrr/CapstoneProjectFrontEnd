@@ -1,4 +1,4 @@
-// setup the homepage to display the movies
+//// setup the homepage to display the movies
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAllMovies } from '../api';

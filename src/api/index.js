@@ -64,19 +64,20 @@ export const getSingleMovie = async (movieId) => {
     //     }
     // };
 
-    // export const fetchMovie = async (id) => {
-    //     try {
-    //         const result = await fetch(`/api/movie/${id}`); // Interpolate id into URL
-    //         if (!result.ok) {
-    //             throw new Error('Failed to fetch movie');
-    //         }
-    //         const response = await result.json();
-    //         return response.movie;
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new Error("Failed to fetch movie");
-    //     }
-    // };
+    export const fetchMovie = async (movieId) => {
+        try {
+            const result = await fetch(`http://localhost:3000/api/movies/${movieId}`);
+            if (!result.ok) {
+                throw new Error('Failed to fetch movie');
+            }
+            const movieData = await result.json();
+            return movieData; // Assuming the response contains the entire movie object
+        } catch (error) {
+            console.error("Failed to fetch movie:", error);
+            throw new Error("Failed to fetch movie");
+        }
+     };
+     
     
     // export const fetchReviews = async () => {
     //     try {
