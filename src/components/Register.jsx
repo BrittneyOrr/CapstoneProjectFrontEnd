@@ -34,49 +34,58 @@ export default function RegisterUser(user) {
             setError(error.message);
             setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <div className='register-container'>
-            <form onSubmit={handleSubmit}>
-                <h3>Register for an account below to make a review:</h3>
-                    <label>
-                        Username:{' '}
+        <div className="black-background">
+
+            <div className="container mt-5">
+
+                <h1 className="text-center text-white mb-4">ReelRave</h1>
+                <h2 className="text-center mb-4" style={{ color: 'cyan' }}>Create an Account to Rate or Review</h2>
+
+                <form onSubmit={handleSubmit} className="w-50 mx-auto" style={{ color: 'white' }}>
+                    <div className="mb-3">
+                        <label htmlFor="username" className="form-label" style={{ color: 'cyan' }}>Username:</label>
                         <input
-                            type='text'
+                            type="text"
+                            className="form-control"
+                            id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
-                    </label>
-                    <p> </p>
+                    </div>
 
-                    <label>
-                        Email:{' '}
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label" style={{ color: 'cyan' }}>Email:</label>
                         <input
-                            type='text'
+                            type="email"
+                            className="form-control"
+                            id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                    </label>
-                    <p> </p>
+                    </div>
 
-
-                    <label> 
-                        Password:{' '}
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label" style={{ color: 'cyan' }}>Password:</label>
                         <input
-                            type='password'
+                            type="password"
+                            className="form-control"
+                            id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                    </label>
-                        <p> </p>
+                    </div>
 
-                    <button type='submit'> Register</button>
-                    {error && <p>{error}    </p>}
-            </form>
+                    <button type="submit" className="btn btn-primary">Register</button>
+                    {error && <p className="text-danger">{error}</p>}
+
+                </form>
+            </div>
         </div>
     );
 }

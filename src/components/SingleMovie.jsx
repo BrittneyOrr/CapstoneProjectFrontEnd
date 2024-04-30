@@ -2,18 +2,19 @@
 import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../index.css';
-// import { fetchMovie } from '../api/index';
+import { fetchMovie } from '../api/index';
 import ReviewForm from './ReviewForm';
 
 const Movie = () => {
-    const [movie, setMovie] = useState([null])
+    const [movie, setMovie] = useState(null)
     const navigate = useNavigate();
     const { id } = useParams();
+    console.log(`http://localhost:5173/api/movie/${id}`)
 
     useEffect (()=> {
         async function fetchMovieData() {
             try {
-                const response = await fetch(`/api/movies/${id}`);
+                const response = await fetchMovie(id);
                 if (!response.ok) {
                     throw new Error('Failed to fetch movie');
                 }
@@ -46,7 +47,7 @@ const Movie = () => {
                     <h2>{movie.release_date}</h2>
                     <h2>{movie.plot}</h2>
                     <h2>Average Rating: {calculateAverageRating()}</h2>
-                    { token ? <ReviewForm movieId={id} /> : null }                
+                    
                 </div>
             ) : (
                 <p>Loading...</p>
@@ -56,3 +57,4 @@ const Movie = () => {
 };   
 
 export default Movie;
+// { token ? <ReviewForm movieId={id} /> : null }                
