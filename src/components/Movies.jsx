@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAllMovies } from '../api';
 import ReviewForm from './ReviewForm';
-import Reviews from './Reviews';
 
 export default function AllMovies () {
     const [movies, setMovies] = useState([]);

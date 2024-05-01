@@ -45,7 +45,12 @@ const SingleMovie = () => {
                             <p> </p>
                             <h2>Movie Plot: {movie.plot}</h2>
                             <h2>Average Rating: {calculateAverageRating()}</h2>
+                            <p> </p>
+                            <p> </p>
+                            <h2>Reviews for {movie.title}</h2>
+
                         </div>
+                        
                         <div className="card-footer">
                             <ReviewForm movieId={movieId} />
                         </div>
