@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchMovie } from '../api/index';
 import ReviewForm from './ReviewForm';
 
-const SingleMovie = () => {
+const SingleMovie = ({token}) => {
     const [movie, setMovie] = useState(null);
     const navigate = useNavigate();
     const { movieId } = useParams();
@@ -52,7 +52,7 @@ const SingleMovie = () => {
                         </div>
                         
                         <div className="card-footer">
-                            <ReviewForm movieId={movieId} />
+                        { token ? <ReviewForm movieId={id} /> : null }
                         </div>
                     </div>
                 </div>
