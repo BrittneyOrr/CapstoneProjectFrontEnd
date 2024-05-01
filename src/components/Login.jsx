@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { login } from '../api';
+import { login } from '../api';
 
 export default function Login({ setToken }) {
         const [username, setUsername] = useState('');
@@ -16,14 +16,23 @@ export default function Login({ setToken }) {
           setPassword(e.target.value);
         };
       
-        const handleSubmit = (e) => {
-          e.preventDefault();
-          console.log('Submitting:', { username, password });
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            try{
           // clear form after submission
-          setUsername('');
-          setPassword('');
-
-
+                const response = await login(username, password);
+                console.log(response);
+                const { token } = response;
+                setToken(token);
+                // localStorage.setItem('token', token); 
+                setUsername('');
+                setPassword('');
+                if(response.message === 'Login success~'){
+                    navigate('/');
+                }
+            }catch(err){
+                console.log(err);
+            }
           //THIS IS MY CODE FROM MY BOOK BUDDY I THINK WE NEED TO DO SOMETHING SIMILAR..THIS AUTHENTICATES
           // const handleSubmit = async (e) => {
           //   e.preventDefault();
@@ -42,17 +51,14 @@ export default function Login({ setToken }) {
           //       const data = await response.json();
           //       throw new Error(data.message);
           //     }
-        
-          //     const data = await response.json();
-          //     const { token } = data;
-          //     setToken(token);
+          
         
           //     const accountData = await getAccountDetails(token);
           //     setUserData(accountData);
         
 
           // Redirect to another page after successful login
-        navigate('/');
+       
         };
       
 return (
