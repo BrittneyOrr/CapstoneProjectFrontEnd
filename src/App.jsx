@@ -10,7 +10,8 @@ import Register from './components/Register';
 import Account from './components/Account';
 
 function App() {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
+
   return (
     <>
       <div class="container">
@@ -25,21 +26,23 @@ function App() {
 
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <Link class="nav-link" to='/login'>Sign In</Link>
-                </li>
-
-                <li class="nav-item">
-                    <Link class="nav-link" to='/register'>Create Account</Link>
-                </li>
-
-                <li class="nav-item">
-                    <Link class="nav-link" to='/users/me'>Account</Link>
-                </li>
-
-            </ul>
-        </div>
+        {token ? (
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <Link class="nav-link" to='/users/me'>Account</Link>
+            </li>
+          </ul>
+        ) : (
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <Link class="nav-link" to='/login'>Sign In</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to='/register'>Create Account</Link>
+            </li>
+          </ul>
+        )}
+        </div> 
     </nav>
 </div>
      
