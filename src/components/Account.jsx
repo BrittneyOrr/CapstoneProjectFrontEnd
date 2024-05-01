@@ -4,7 +4,7 @@ reviews, comments, edit those, and delete them.
  */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Reviews from './Reviews';
+import UserReviews from './UserReviews';
 
 const Account = () => {
   // State for user reviews, comments, loading, and form data
