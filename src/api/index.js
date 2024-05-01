@@ -76,19 +76,19 @@ export const getAllMovies = async () => {
         }
     }
 
-    // export const fetchReview = async (reviewId) => {
-    //     try {
-    //         const result = await fetch(`/api/reviews/${id}`);
-    //         if (!result.ok) {
-    //             throw new Error('Failed to fetch review');
-    //         }
-    //         const response = await result.json();
-    //         return response.review;
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new Error("Failed to fetch review");
-    //     }
-    // }
+    export const fetchUserReviews = async (userId) => {
+        try {
+            const result = await fetch(`http://localhost:3000/api/reviews/${userId}`);
+            if (!result.ok) {
+                throw new Error('Failed to fetch review');
+            }
+            const response = await result.json();
+            return response.review;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Failed to fetch review");
+        }
+    }
 
     // export const fetchComments = async () => {
     //     try {
