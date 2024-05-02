@@ -43,6 +43,7 @@ export default function AllMovies () {
                 <div className="container py-4">
                     <h1 className="text-light">ReelRave</h1>
                     <h2 className="text-light mb-4">Cinematic Chronicles: Your Ultimate Destination for Film Reviews and Insights!</h2>
+                    
                 </div>
             </div>
             <div className='black-background'>
@@ -62,7 +63,6 @@ export default function AllMovies () {
                                         </div>
                                         <div className="card-footer">
                                             <button onClick={() => navigate(`/api/movies/${id}`)} className='btn btn-primary btn-sm' style={{ backgroundColor: 'purple' }}>See Details</button>
-                                            <ReviewForm movieId={id} />
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,3 @@ export default function AllMovies () {
         </div>
     );
 }
-    
-// took plot out of the card so that it could be on single movie page
-// <li>Plot: {plot}</li>
-// { token ? <ReviewForm movieId={id} /> : null }

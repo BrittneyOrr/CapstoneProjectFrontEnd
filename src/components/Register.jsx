@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RegisterUser(user) {
     const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    // const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -18,17 +19,19 @@ export default function RegisterUser(user) {
         // }
         setIsLoading(true);
         try {
-            const response = await fetch('/api/register', {
+            const response = await fetch('http://localhost:3000/api/users/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     username,
+                    name,
                     email,
                     password
                 })
             });
             const data = await response.json();
             console.log(data);
+            setToken (data.token); 
             navigate('/login');
         } catch (error) {
             setError(error.message);
@@ -53,6 +56,18 @@ export default function RegisterUser(user) {
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label" style={{ color: 'cyan' }}>Name:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>

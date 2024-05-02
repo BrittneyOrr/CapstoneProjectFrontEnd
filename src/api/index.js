@@ -17,23 +17,23 @@ export const getAllMovies = async () => {
         throw error; // Re-throw the error to propagate it further
     }
 };
+export const login = async (username, password) => {
+try{
+    const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            });
+            return response.json();
 
-export const getSingleMovie = async (movieId) => {
-    try {
-        //NEED TO FIX THE API URL WHEN WE GET IT FIGURED OUT
-        const result = await fetch(`http://localhost:3000/api/movies/${movieId}`);
-        // const result = await fetch(`${API_URL}/${movieId}`);
-        const response = await result.json();
-        console.log(response.movie);
-        return response.movie;
+}catch(err){
+    console.log(err);
+}
 
-    } catch (err) {
-        console.log(err);
-        throw err;
-    }
-};
-
-
+}
 
     // export const getAllMovies = async () => {
     //     try {
@@ -75,37 +75,37 @@ export const getSingleMovie = async (movieId) => {
         } catch (error) {
             console.error("Failed to fetch movie:", error);
             throw new Error("Failed to fetch movie");
-        }
+        }     
      };
      
     
-    // export const fetchReviews = async () => {
-    //     try {
-    //         const result = await fetch('/api/reviews');
-    //         if (!result.ok) {
-    //             throw new Error('Failed to fetch reviews');
-    //         }
-    //         const response = await result.json();
-    //         return response.reviews;
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new Error("Failed to fetch reviews");
-    //     }
-    // }
+    export const fetchMovieReviews = async (movieId) => {
+        try {
+            const result = await fetch(`http://localhost:3000/api/reviews/${movieId}`);
+            if (!result.ok) {
+                throw new Error('Failed to fetch reviews');
+            }
+            const response = await result.json();
+            return response.reviews;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Failed to fetch reviews");
+        }
+    }
 
-    // export const fetchReview = async (id) => {
-    //     try {
-    //         const result = await fetch(`/api/reviews/${id}`);
-    //         if (!result.ok) {
-    //             throw new Error('Failed to fetch review');
-    //         }
-    //         const response = await result.json();
-    //         return response.review;
-    //     } catch (error) {
-    //         console.log(error);
-    //         throw new Error("Failed to fetch review");
-    //     }
-    // }
+    export const fetchUserReviews = async (userId) => {
+        try {
+            const result = await fetch(`http://localhost:3000/api/reviews/${userId}`);
+            if (!result.ok) {
+                throw new Error('Failed to fetch review');
+            }
+            const response = await result.json();
+            return response.review;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Failed to fetch review");
+        }
+    }
 
     // export const fetchComments = async () => {
     //     try {
