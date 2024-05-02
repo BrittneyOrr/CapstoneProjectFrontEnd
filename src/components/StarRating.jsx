@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const StarRating = ({ onChange }) => {
-    const [rating, setRating] = useState(0);
+const StarRating = ({ value, onChange }) => {
+    const [rating, setRating] = useState(value);
 
-    const handleStarClick = (value) => {
-        setRating(value);
-        onChange(value);
+    const handleStarClick = (newValue) => {
+        setRating(newValue);
+        onChange(newValue);
     };
 
     return (
