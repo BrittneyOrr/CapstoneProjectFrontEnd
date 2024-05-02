@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../api';
 
 export default function RegisterUser(user) {
     const [username, setUsername] = useState('');
@@ -11,34 +12,30 @@ export default function RegisterUser(user) {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    async function handleSubmit(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // if (password!== confirmPassword) {
-        //     setError('Passwords do not match');
-        //     return;
-        // }
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username,
-                    name,
-                    email,
-                    password
-                })
+            const response = await register({
+                username,
+                name,
+                email,
+                password
             });
-            const data = await response.json();
-            console.log(data);
-            setToken (data.token); 
+            console.log(response);
+            // Handle success, set token, navigate, etc.
+            const { token } = response;
+            // setToken(token);
+            // localStorage.setItem('token', token); 
+            setUsername('');
+            setPassword('');
+            setIsLoading(false);
             navigate('/login');
         } catch (error) {
             setError(error.message);
             setIsLoading(false);
         }
     };
-
     return (
         <div className="black-background">
 
