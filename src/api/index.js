@@ -5,10 +5,10 @@
 
 export const getAllMovies = async () => {
     try {
-        const result = await fetch('http://localhost:3000/api/movies');
-        if (!result.ok) {
-            throw new Error('Failed to fetch movies');
-        }
+        const result = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/movies');
+        // if (!result.ok) {
+        //     throw new Error('Failed to fetch movies');
+        // }
         const response = await result.json();
         console.log(response);
         return response;

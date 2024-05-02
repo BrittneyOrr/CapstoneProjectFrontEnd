@@ -52,7 +52,7 @@ const SingleMovie = ({token}) => {
                         </div>
                         
                         <div className="card-footer">
-                        { token ? <ReviewForm movieId={id} /> : null }
+                        { token ? <ReviewForm movieId={movie.id} /> : null }
                         </div>
                     </div>
                 </div>
@@ -64,4 +64,3 @@ const SingleMovie = ({token}) => {
 };
 
 export default SingleMovie;
-// { token ? <ReviewForm movieId={id} /> : null }
