@@ -68,11 +68,13 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={<Movies />} />
-          <Route path="/api/movies/:movieId" element={<SingleMovie />} />
-          <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/register" element={<Register setToken={setToken} />} />
-          <Route path="/users/me" element={<Account token={token} />} />
+
+          <Route path='/' element={<Movies />} />
+          <Route path='/api/movies/:movieId' element={<SingleMovie token={token} />} />
+          <Route path='/login' element={<Login setToken={setToken} />} />
+          <Route path='/register' element={<Register setToken={setToken} />} />
+          <Route path='/users/me' element={<Account token={token} />} />
+
         </Routes>
       </div>
     </>

@@ -30,30 +30,31 @@ const SingleMovie = ({token}) => {
     };
 
     return (
-        <div className="bg-dark">
-            <div className="black-background" style={{ backgroundColor: '#222' }}>
-                <div className="container py-4">
-                    <h2 className="my-4 text-light" style={{ color: 'cyan' }}>About This Movie</h2>
-                    {movie ? (
-                        <div className="row">
-                            <div className="col-md-4">
-                                <img src={movie.poster_url} alt={movie.title} className="img-fluid shadow-lg rounded" />
-                            </div>
-                            <div className="col-md-8">
-                                <div className="card bg-dark text-light border-light">
-                                    <div className="card-body">
-                                        <h2 className="text-light">{movie.title}</h2>
-                                        <p><i className="fas fa-film" style={{ color: 'green' }}></i> Category: <span style={{ color: 'green' }}>{movie.category}</span></p>
-                                        <p><i className="fas fa-calendar-alt" style={{ color: 'orange' }}></i> Release Date: <span  style={{ color: 'orange' }}>{movie.release_date}</span></p>
-                                        <p><i className="fas fa-align-left" style={{ color: 'cyan' }}></i> Movie Plot: <span style={{ color: 'cyan' }}>{movie.plot}</span></p>
-                                        <p><i className="fas fa-star" style={{ color: 'yellow' }}></i> Average Rating: <span style={{ color: 'yellow' }}>{calculateAverageRating()}</span></p>
-                                        <h3 className="text-light">Reviews for {movie.title}</h3>
-                                    </div>
-                                    <div className="card-footer">
-                                        {token ? <ReviewForm movieId={movieId} /> : null}
-                                    </div>
-                                </div>
-                            </div>
+
+        <div>
+            <h2>Movie Details</h2>
+            {movie ? (
+                <div className="bg-dark">
+                    <div className="container py-4">
+                        <div className="MovieCard" style={{ color: 'white' }}>
+                        <img src={movie.poster_url} alt={movie.title} className="img-fluid" />
+                            <h2>Title: {movie.title}</h2>
+                            <p> </p>
+                            <h2>Category: {movie.category}</h2>
+                            <p> </p>
+                            <h2>Release Date: {movie.release_date}</h2>
+                            <p> </p>
+                            <h2>Movie Plot: {movie.plot}</h2>
+                            <h2>Average Rating: {calculateAverageRating()}</h2>
+                            <p> </p>
+                            <p> </p>
+                            <h2>Reviews for {movie.title}</h2>
+
+                        </div>
+                        
+                        <div className="card-footer">
+                        { token ? <ReviewForm movieId={movie.id} /> : null }
+
                         </div>
                     ) : (
                         <p className="text-light">Loading...</p>
@@ -66,4 +67,4 @@ const SingleMovie = ({token}) => {
 
 
 export default SingleMovie;
-// { token ? <ReviewForm movieId={id} /> : null }
+
