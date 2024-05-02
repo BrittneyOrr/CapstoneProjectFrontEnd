@@ -33,32 +33,7 @@ export default function Login({ setToken }) {
             }catch(err){
                 console.log(err);
             }
-          //THIS IS MY CODE FROM MY BOOK BUDDY I THINK WE NEED TO DO SOMETHING SIMILAR..THIS AUTHENTICATES
-          // const handleSubmit = async (e) => {
-          //   e.preventDefault();
-          //   try {
-              
-          //     const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login', {
-          //       method: 'POST',
-          //       headers: {
-          //         'Content-Type': 'application/json',
-          //         // Authorization: `Bearer ${token}`,
-          //       },
-          //       body: JSON.stringify({ email, password }),
-          //     });
-        
-          //     if (!response.ok) {
-          //       const data = await response.json();
-          //       throw new Error(data.message);
-          //     }
           
-        
-          //     const accountData = await getAccountDetails(token);
-          //     setUserData(accountData);
-        
-
-          // Redirect to another page after successful login
-       
         };
       
 return (
