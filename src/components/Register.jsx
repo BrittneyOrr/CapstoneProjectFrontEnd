@@ -31,6 +31,7 @@ export default function RegisterUser(user) {
             });
             const data = await response.json();
             console.log(data);
+            setToken (data.token); 
             navigate('/login');
         } catch (error) {
             setError(error.message);

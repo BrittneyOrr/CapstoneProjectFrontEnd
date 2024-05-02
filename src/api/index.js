@@ -17,6 +17,23 @@ export const getAllMovies = async () => {
         throw error; // Re-throw the error to propagate it further
     }
 };
+export const login = async (username, password) => {
+try{
+    const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            });
+            return response.json();
+
+}catch(err){
+    console.log(err);
+}
+
+}
 
     // export const getAllMovies = async () => {
     //     try {
