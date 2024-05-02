@@ -118,7 +118,7 @@ export default function RegisterUser(user) {
               />
             </div>
             <div className="mb-3 d-flex justify-content-center">
-              <button type="submit" className="btn btn-primary btn-lg">
+              <button type="submit" className="btn btn-primary ">
                 Register
               </button>
             </div>

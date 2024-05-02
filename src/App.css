@@ -26,15 +26,7 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 } */
-/* .btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-} */
+
 .black-background {
   background-color: black;
   color: white; /* Optional: Set text color to white for better readability */
@@ -76,6 +68,10 @@
     }
 }
 
+.btn {
+  width: 100%; 
+  height: inherit;
+}
 
 
 /* Navbar Styles */

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api";
-// import '../App.css'
+import '../App.css'
 
 export default function Login({ setToken }) {
   const [username, setUsername] = useState("");
@@ -86,7 +86,7 @@ export default function Login({ setToken }) {
           </div>
 
           <div className="mb-3 d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary btn-lg">
+            <button type="submit" className="btn btn-primary custom">
               Login
             </button>
           </div>
