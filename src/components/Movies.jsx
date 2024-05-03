@@ -1,74 +1,83 @@
-//// setup the homepage to display the movies
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllMovies } from '../api';
-import ReviewForm from './ReviewForm';
-import StarRating from './StarRating'; // Import the StarRating component
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAllMovies } from "../api";
+import ReviewForm from "./ReviewForm";
+import StarRating from "./StarRating"; // Import the StarRating component
+import Navbar from "./Navbar"; // Import the Navbar component
 
 export default function AllMovies() {
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [averageRating, setAverageRating] = useState(0); // State to hold the average rating
-    const navigate = useNavigate();
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [averageRating, setAverageRating] = useState(0); // State to hold the average rating
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        async function getAllMoviesHandler() {
-            try {
-                const moviesData = await getAllMovies();
-                setMovies(moviesData);
-                setIsLoading(false);
-            } catch (error) {
-                setError(error);
-                setIsLoading(false);
-            }
-        }
-        getAllMoviesHandler();
-    }, []);
-
-    const calculateAverageRating = (reviews) => {
-        if (!reviews || reviews.length === 0) {
-            return 0;
-        }
-        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-        return totalRating / reviews.length;
-    };
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleRatingChange = (newValue) => {
-        setAverageRating(newValue); // Update the average rating state with the new value
-    };
-
-    const filteredMovies = movies.filter(movie =>
-        movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (isLoading) {
-        return <p>Loading...</p>;
-    } if (error) {
-        return <p>Error: {error.message}</p>;
+  useEffect(() => {
+    async function getAllMoviesHandler() {
+      try {
+        const moviesData = await getAllMovies();
+        setMovies(moviesData);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+      }
     }
+    getAllMoviesHandler();
+  }, []);
 
-    return (
-      <div>
+  const calculateAverageRating = (reviews) => {
+    if (!reviews || reviews.length === 0) {
+      return 0;
+    }
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / reviews.length;
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleRatingChange = (newValue) => {
+    setAverageRating(newValue); // Update the average rating state with the new value
+  };
+
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  return (
+    <>
+      {/* <Navbar /> */}
+      <div className="container-fluid" style={{ paddingTop: "85px" }}>
         <div className="bg-dark">
-          <div className="container py-4">
-            <h1 className="text-light">ReelRave</h1>
-            <h2 className="text-light mb-4">
-              Cinematic Chronicles: Your Ultimate Destination for Film Reviews
-              and Insights!
-            </h2>
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Search Movies"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
+          <div className="container py-7">
+            <div className="row">
+              <div className="col-lg-6">
+                <h1 className="text-light">Reel Rave</h1>
+                <h4 className="text-light mb-4">
+                  Cinematic Chronicles: Your Ultimate Destination for Film
+                  Reviews and Insights!
+                </h4>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search Movies"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div className="black-background">
@@ -110,7 +119,7 @@ export default function AllMovies() {
                           {release_date}
                         </p>
                         {/* Integrate the StarRating component here */}
-                        <p className="card-text">
+                        <div className="card-text">
                           <strong style={{ color: "green" }}>
                             Average Rating:
                           </strong>{" "}
@@ -118,7 +127,7 @@ export default function AllMovies() {
                             value={calculateAverageRating(reviews)}
                             onChange={handleRatingChange}
                           />
-                        </p>
+                        </div>
                       </div>
                       <div className="card-footer p-2">
                         <button
@@ -137,5 +146,6 @@ export default function AllMovies() {
           </div>
         </div>
       </div>
-    );
+    </>
+  );
 }
