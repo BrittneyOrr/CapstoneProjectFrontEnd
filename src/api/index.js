@@ -81,12 +81,12 @@ try{
     export const fetchMovieReviews = async (movieId) => {
         try {
             const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${movieId}`);
-            if (!result.ok) {
-                throw new Error('Failed to fetch reviews');
-            }
+            // if (!result.ok) {
+            //     throw new Error('Failed to fetch reviews');
+            // }
             const response = await result.json();
-            console.log(response.reviews);
-            return response.reviews;
+           
+            return response;
         } catch (error) {
             console.log(error);
             throw new Error("Failed to fetch reviews");
@@ -152,13 +152,25 @@ try{
         }
     }
 
-   export const submitReview = async (reviewData) => {
+    export const submitReview = async (reviewData) => {
+        try {
+                // await fetch('https://localhost:3000/api/reviews', {
         //     // Example: Make an API request to submit review data to the server
-            await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/reviews', {
+
+
+            const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/reviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(reviewData),
             });
-        };
+            // if (!response.ok) {
+            //     throw new Error('Failed to register');
+            // }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }

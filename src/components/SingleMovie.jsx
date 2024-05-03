@@ -15,7 +15,7 @@ const SingleMovie = ({ token }) => {
             try {
                 const movieData = await fetchMovie(movieId);
                 setMovie(movieData);
-
+                
                 const reviewsData = await fetchMovieReviews(movieId);
                 setReviews(reviewsData);
             } catch (error) {
@@ -23,17 +23,10 @@ const SingleMovie = ({ token }) => {
             }
         }
         fetchMovieData();
-        fetchMovieReviews();
+     
     }, [movieId]);
 
-    const calculateAverageRating = () => {
-        if (!reviews || reviews.length === 0) {
-            return 0;
-        }
-        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-        return totalRating / reviews.length;
-    };
-    
+    console.log({reviews});
 
     return (
         <div className="bg-dark">
@@ -52,13 +45,34 @@ const SingleMovie = ({ token }) => {
                                         <p><i className="fas fa-film" style={{ color: 'green' }}></i> Category: <span style={{ color: 'green' }}>{movie.category}</span></p>
                                         <p><i className="fas fa-calendar-alt" style={{ color: 'orange' }}></i> Release Date: <span  style={{ color: 'orange' }}>{movie.release_date}</span></p>
                                         <p><i className="fas fa-align-left" style={{ color: 'cyan' }}></i> Movie Plot: <span style={{ color: 'cyan' }}>{movie.plot}</span></p>
-                                        <p><i className="fas fa-star" style={{ color: 'yellow' }}></i> Average Rating: <span style={{ color: 'yellow' }}>{calculateAverageRating()}</span></p>
                                     </div>
                                     <div className="card-footer">
                                         {token ? <ReviewForm movieId={movieId} /> : null}
                                         <p> </p>
                                         <h3 className="text-light">Reviews for {movie.title}</h3>
-                                       
+
+                                        <div className='black-background'>
+                                            <div className='container'>
+                                                <div className="row row-cols-1 row-cols-md-3 g-4">
+                                                    {reviews.map((review) => {
+                                                        const { comment, rating, review_date, id } = review; // Destructure from each individual review object
+                                                        return (
+                                                            <div key={id} className="col">
+                                                                <div className="card h-100" style={{ backgroundColor: '#333', color: 'white' }}>
+                                                                    <div className="card-body p-2">
+                                                                        <h5 className="card-title" style={{ color: 'cyan' }}>{rating}</h5>
+                                                                        <p className="card-text"><strong style={{ color: 'yellow' }}>Comment:</strong> {comment}</p>
+                                                                        <p className="card-text"><strong style={{ color: 'orange' }}>Review Date:</strong> {review_date}</p>
+                                                                        {/* Integrate the StarRating component here */}
+                                                                        <div> {/* StarRating component */}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -72,5 +86,6 @@ const SingleMovie = ({ token }) => {
     );
 };
 
-
 export default SingleMovie;
+
+// <p><i className="fas fa-star" style={{ color: 'yellow' }}></i> Average Rating: <span style={{ color: 'yellow' }}>{calculateAverageRating()}</span></p>

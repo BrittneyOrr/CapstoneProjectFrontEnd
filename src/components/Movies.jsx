@@ -82,7 +82,9 @@ export default function AllMovies() {
                                             <p className="card-text"><strong style={{ color: 'yellow' }}>Category:</strong> {category}</p>
                                             <p className="card-text"><strong style={{ color: 'orange' }}>Release Date:</strong> {release_date}</p>
                                             {/* Integrate the StarRating component here */}
-                                            <p className="card-text"><strong style={{ color: 'green' }}>Average Rating:</strong> <StarRating value={calculateAverageRating(reviews)} onChange={handleRatingChange} /></p>
+                                            <div>
+                                                <strong style={{ color: 'green' }}>Average Rating:</strong> <StarRating value={calculateAverageRating(reviews)} onChange={handleRatingChange} />
+                                            </div>
                                         </div>
                                         <div className="card-footer p-2">
                                             <button onClick={() => navigate(`/api/movies/${id}`)} className='btn btn-primary btn-sm' style={{ backgroundColor: 'purple' }}>See Details</button>

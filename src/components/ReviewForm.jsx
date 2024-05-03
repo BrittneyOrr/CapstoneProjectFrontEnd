@@ -10,10 +10,12 @@ const ReviewForm = ({ movieId }) => {
         e.preventDefault();
         // Submit review data to backend
         const reviewData = {
-            movieId,
-            rating,
-            comment,
-            review_date
+            movie_id: '',
+            user_id: '',
+            rating: '',
+            comment: '',
+            review_date: ''
+
         };
         try {
     //         // Call function to submit review data to server
