@@ -10,19 +10,21 @@ import {
 
 const Account = () => {
 
+  const [user, setUser] = useState()
+
   const { movieId, userId, reviewId } = useParams();
 
-  useEffect(() => {
-    const fetchUser = async (userId) => {
-      try {
-        const response = await login();
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async (userId) => {
+  //     try {
+  //       const response = await login();
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   return (
     <>
