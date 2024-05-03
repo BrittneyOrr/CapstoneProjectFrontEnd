@@ -8,7 +8,7 @@ const SingleMovie = ({ token }) => {
     const [movie, setMovie] = useState(null);
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
-    const { movieId } = useParams();
+    const { movieId, userId } = useParams();
 
     useEffect(() => {
         async function fetchMovieData() {
@@ -17,9 +17,10 @@ const SingleMovie = ({ token }) => {
                 setMovie(movieData);
                 
                 const reviewsData = await fetchMovieReviews(movieId);
-                setReviews(reviewsData);
+                setReviews(reviewsData || []);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setReviews([]);
             }
         }
         fetchMovieData();
@@ -47,32 +48,10 @@ const SingleMovie = ({ token }) => {
                                         <p><i className="fas fa-align-left" style={{ color: 'cyan' }}></i> Movie Plot: <span style={{ color: 'cyan' }}>{movie.plot}</span></p>
                                     </div>
                                     <div className="card-footer">
-                                        {token ? <ReviewForm movieId={movieId} /> : null}
+                                        {token ? <ReviewForm movieId={movieId} userId={userId} /> : null}
                                         <p> </p>
                                         <h3 className="text-light">Reviews for {movie.title}</h3>
-
-                                        <div className='black-background'>
-                                            <div className='container'>
-                                                <div className="row row-cols-1 row-cols-md-3 g-4">
-                                                    {reviews.map((review) => {
-                                                        const { comment, rating, review_date, id } = review; // Destructure from each individual review object
-                                                        return (
-                                                            <div key={id} className="col">
-                                                                <div className="card h-100" style={{ backgroundColor: '#333', color: 'white' }}>
-                                                                    <div className="card-body p-2">
-                                                                        <h5 className="card-title" style={{ color: 'cyan' }}>{rating}</h5>
-                                                                        <p className="card-text"><strong style={{ color: 'yellow' }}>Comment:</strong> {comment}</p>
-                                                                        <p className="card-text"><strong style={{ color: 'orange' }}>Review Date:</strong> {review_date}</p>
-                                                                        {/* Integrate the StarRating component here */}
-                                                                        <div> {/* StarRating component */}</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {/* Reviews section should be here */}
                                     </div>
                                 </div>
                             </div>
