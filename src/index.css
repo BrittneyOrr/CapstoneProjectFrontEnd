@@ -1,0 +1,11 @@
+.noPageFound{
+  background-image: url("../notFoundPage.png"); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+  padding-top: 60px;
+} 

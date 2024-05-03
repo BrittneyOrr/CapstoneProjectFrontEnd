@@ -1,53 +1,35 @@
-
-
-import { useState } from 'react';
-import StarRating from './StarRating';
-import { submitReview } from '../api';
-
+import { useState } from "react";
+import StarRating from "./StarRating";
+import { submitReview } from "../api";
 
 const ReviewForm = ({ movieId, userId }) => {
-    const [rating, setRating] = useState('');
-    const [comment, setComment] = useState('');
+  const [rating, setRating] = useState("");
+  const [comment, setComment] = useState("");
 
-// const ReviewForm = ({ movieId }) => {
-//   const [rating, setRating] = useState("");
-//   const [comment, setComment] = useState("");
-
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     // Submit review data to backend
-//     const reviewData = {
-//       movieId,
-//       rating,
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Submit review data to backend
-        const reviewData = {
-            movie_id: movieId,
-            user_id: userId,
-            rating: rating,
-            comment: comment,
-            review_date: new Date().toISOString()
-        };
-        try {
-    //         // Call function to submit review data to server
-            await submitReview(reviewData);
-            alert('Review submitted successfully!');
-    //         // Clear form fields after submission
-    console.log(reviewData);
-            setRating('');
-            setComment('');
-        } catch (error) {
-    //         // Handle errors if submission fails
-            console.error('Error submitting review:', error);
-    //         // Display an error message to the user
-            alert('Failed to submit review. Please try again later.');
-        }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Submit review data to backend
+    const reviewData = {
+      movie_id: movieId,
+      user_id: userId,
+      rating: rating,
+      comment: comment,
+      review_date: new Date().toISOString()
     };
+    try {
+      // Call function to submit review data to server
+      await submitReview(reviewData);
+      alert("Review submitted successfully!");
+      // Clear form fields after submission
+      console.log(reviewData);
+      setRating("");
+      setComment("");
+    } catch (error) {
+      // Handle errors if submission fails
+      console.error("Error submitting review:", error);
+      // Display an error message to the user
+      alert("Failed to submit review. Please try again later.");
+    }
   };
 
   return (
@@ -87,7 +69,6 @@ const ReviewForm = ({ movieId, userId }) => {
   );
 };
 
-
 export default ReviewForm;
 
 //     try {
@@ -120,5 +101,4 @@ export default ReviewForm;
 //     //     body: JSON.stringify(reviewData),
 //     // });
 
-export default ReviewForm;
-
+// export default ReviewForm;

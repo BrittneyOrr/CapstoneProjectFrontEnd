@@ -25,31 +25,9 @@ const Account = () => {
   const { userId } = useParams(); // Assuming you have a userId parameter in the route
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const reviews = await fetchUserReviews(userId);
-  //       setUserReviews(reviews);
-  //       const info = await fetchUserInfo(userId);
-  //       setUserInfo(info);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, [userId]); // Include userId in the dependency array
 
-  const handleEditReview = (id) => {
-    // Logic to handle editing the review
-    navigate(`/edit-review/${id}`); // Assuming you have a route for editing reviews
-  };
 
-  const handleDeleteReview = (id) => {
-    // Logic to handle deleting the review
-    setUserReviews(userReviews.filter((review) => review.id !== id));
-  };
 
   return (
     <div className="conatiner-fluid" style={{paddingTop: "85px"}}>
