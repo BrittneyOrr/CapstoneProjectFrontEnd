@@ -39,16 +39,6 @@
  animation: flashy 1s infinite alternate;
 }
 
-/* .logo-container {
-  position: relative;
-  /* width: 100%; 
-  height: 200px; 
-} */
-
-/* .logo {
-  width: 100%;
-  height: auto;
-} */
 
 /* Define keyframes for flashy animation */
 @keyframes flashy {
@@ -58,4 +48,79 @@
 }
 .logo:hover {
   animation: flashy 1s infinite; /* Adjust animation duration and other properties as needed */
+}
+
+.input-field {
+  width: 40%;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  font-size: 1em;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .input-field {
+    font-size: 0.9em; /* Reduce font size for smaller screens */
+    padding: 0.3em; /* Reduce padding for smaller screens */
+  }
+  .btn {
+      width: 70%;
+    }
+}
+
+.btn {
+  width: 100%; 
+  height: inherit;
+}
+
+
+/* Navbar Styles */
+.navbar {
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333; /* Dark gray text color */
+  padding: 8px 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none; /* Hide menu by default */
+    position: absolute;
+    background-color: #f8f9fa; /* Light gray background */
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    top: 50px; /* Position below navbar */
+    left: 0;
+  }
+
+  .navbar ul.active {
+    display: block; /* Show menu when active class is applied */
+  }
+
+  .navbar li {
+    display: block;
+    margin-right: 0;
+    text-align: center;
+    margin-bottom: 5px;
+  }
 }
