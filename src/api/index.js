@@ -1,14 +1,13 @@
 // setup the API CRUD to pull movies
-// is this needed? -> const API_URL = 'https://';
 //DO WE NEED TO DEPLOY TO GET OUR BASE URL?
 // const API_URL = "https://localhost:5432";
 
 export const getAllMovies = async () => {
     try {
         const result = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/movies');
-        // if (!result.ok) {
-        //     throw new Error('Failed to fetch movies');
-        // }
+        if (!result.ok) {
+            throw new Error('Failed to fetch movies');
+        }
         const response = await result.json();
         console.log(response);
         return response;
@@ -19,7 +18,7 @@ export const getAllMovies = async () => {
 };
 export const login = async (username, password) => {
 try{
-    const response = await fetch('http://localhost:3000/api/users/login', {
+    const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -66,7 +65,7 @@ try{
 
     export const fetchMovie = async (movieId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/movies/${movieId}`);
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/movies/${movieId}`);
             if (!result.ok) {
                 throw new Error('Failed to fetch movie');
             }
@@ -81,11 +80,12 @@ try{
     
     export const fetchMovieReviews = async (movieId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/reviews/${movieId}`);
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${movieId}`);
             if (!result.ok) {
                 throw new Error('Failed to fetch reviews');
             }
             const response = await result.json();
+            console.log(response.reviews);
             return response.reviews;
         } catch (error) {
             console.log(error);
@@ -95,7 +95,7 @@ try{
 
     export const fetchUserReviews = async (userId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/reviews/${userId}`);
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${userId}`);
             if (!result.ok) {
                 throw new Error('Failed to fetch review');
             }
@@ -137,7 +137,7 @@ try{
 
     export async function register(userData) {
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/users/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
@@ -151,3 +151,14 @@ try{
             throw new Error(error.message);
         }
     }
+
+   export const submitReview = async (reviewData) => {
+        //     // Example: Make an API request to submit review data to the server
+            await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reviewData),
+            });
+        };

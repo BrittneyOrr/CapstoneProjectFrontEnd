@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserReviews from './UserReviews';
+// import { fetchUserReviews } from '../api';
 
 // Updated fetchUserReviews function as shown above
 

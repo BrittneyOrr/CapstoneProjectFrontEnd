@@ -4,7 +4,6 @@ import { register } from '../api';
 
 export default function RegisterUser(user) {
     const [username, setUsername] = useState('');
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,7 +17,6 @@ export default function RegisterUser(user) {
         try {
             const response = await register({
                 username,
-                name,
                 email,
                 password
             });
@@ -53,18 +51,6 @@ export default function RegisterUser(user) {
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label" style={{ color: 'cyan' }}>Name:</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import StarRating from './StarRating';
+import { submitReview } from '../api';
 
 const ReviewForm = ({ movieId }) => {
     const [rating, setRating] = useState('');
@@ -11,37 +12,23 @@ const ReviewForm = ({ movieId }) => {
         const reviewData = {
             movieId,
             rating,
-            comment
+            comment,
+            review_date
         };
-    //     try {
+        try {
     //         // Call function to submit review data to server
-    //         await submitReview(reviewData);
-    //         // Redirect or display message after successful submission
-    //         // Example: Redirect to the movie details page
-    //         // history.push(`/movies/${movieId}`);
-    //         // Display a success message
-    //         alert('Review submitted successfully!');
+            await submitReview(reviewData);
+            alert('Review submitted successfully!');
     //         // Clear form fields after submission
-    //         setRating('');
-    //         setComment('');
-    //     } catch (error) {
+    console.log(reviewData);
+            setRating('');
+            setComment('');
+        } catch (error) {
     //         // Handle errors if submission fails
-    //         console.error('Error submitting review:', error);
+            console.error('Error submitting review:', error);
     //         // Display an error message to the user
-    //         alert('Failed to submit review. Please try again later.');
-    //     }
-    // };
-
-    // // Replace this with your actual submitReview function
-    // const submitReview = async (reviewData) => {
-    //     // Example: Make an API request to submit review data to the server
-    //     // await fetch('/api/reviews', {
-    //     //     method: 'POST',
-    //     //     headers: {
-    //     //         'Content-Type': 'application/json',
-    //     //     },
-    //     //     body: JSON.stringify(reviewData),
-    //     // });
+            alert('Failed to submit review. Please try again later.');
+        }
     };
 
 
