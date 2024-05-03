@@ -1,9 +1,13 @@
-import { useState } from "react";
-import StarRating from "./StarRating";
+
+
+import { useState } from 'react';
+import StarRating from './StarRating';
+import { submitReview } from '../api';
 
 const ReviewForm = ({ movieId }) => {
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,6 +16,33 @@ const ReviewForm = ({ movieId }) => {
       movieId,
       rating,
       comment
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Submit review data to backend
+        const reviewData = {
+            movie_id: '',
+            user_id: '',
+            rating: '',
+            comment: '',
+            review_date: ''
+
+        };
+        try {
+    //         // Call function to submit review data to server
+            await submitReview(reviewData);
+            alert('Review submitted successfully!');
+    //         // Clear form fields after submission
+    console.log(reviewData);
+            setRating('');
+            setComment('');
+        } catch (error) {
+    //         // Handle errors if submission fails
+            console.error('Error submitting review:', error);
+    //         // Display an error message to the user
+            alert('Failed to submit review. Please try again later.');
+        }
+
     };
   };
 
@@ -52,6 +83,7 @@ const ReviewForm = ({ movieId }) => {
   );
 };
 
+
 export default ReviewForm;
 
 //     try {
@@ -83,3 +115,6 @@ export default ReviewForm;
 //     //     },
 //     //     body: JSON.stringify(reviewData),
 //     // });
+
+export default ReviewForm;
+
