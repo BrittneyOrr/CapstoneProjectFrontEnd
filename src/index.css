@@ -1,3 +1,28 @@
+.conatiner-fluid {
+    margin: auto;
+    text-align: center;
+    padding-top: 7rem;
+}
+
+.loading{
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 0 5px 8px green;
+    color: #333;
+    animation: flashy 1s infinite alternate;
+}
+
+ .noPageFound{
+  background-image: url("../notFoundPage.png"); 
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+  padding-top: 60px;
+} 
 .noPageFound{
   background-image: url("../notFoundPage.png"); 
   background-size: cover;

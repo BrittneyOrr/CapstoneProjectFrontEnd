@@ -9,6 +9,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Account from "./components/Account";
 import Navbar from "./components/Navbar";
+import NotFoundPage from "./components/NotFoundPage";
+
+
 
 function App() {
   const [token, setToken] = useState(null);
@@ -42,7 +45,7 @@ function App() {
             path="/users/me"
             element={<Account token={token} userInfo={userInfo} />}
           />
-
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </>
