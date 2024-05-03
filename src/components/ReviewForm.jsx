@@ -4,29 +4,33 @@ import { useState } from 'react';
 import StarRating from './StarRating';
 import { submitReview } from '../api';
 
-const ReviewForm = ({ movieId }) => {
-  const [rating, setRating] = useState("");
-  const [comment, setComment] = useState("");
+
+const ReviewForm = ({ movieId, userId }) => {
+    const [rating, setRating] = useState('');
+    const [comment, setComment] = useState('');
+
+// const ReviewForm = ({ movieId }) => {
+//   const [rating, setRating] = useState("");
+//   const [comment, setComment] = useState("");
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Submit review data to backend
-    const reviewData = {
-      movieId,
-      rating,
-      comment
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     // Submit review data to backend
+//     const reviewData = {
+//       movieId,
+//       rating,
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Submit review data to backend
         const reviewData = {
-            movie_id: '',
-            user_id: '',
-            rating: '',
-            comment: '',
-            review_date: ''
-
+            movie_id: movieId,
+            user_id: userId,
+            rating: rating,
+            comment: comment,
+            review_date: new Date().toISOString()
         };
         try {
     //         // Call function to submit review data to server
