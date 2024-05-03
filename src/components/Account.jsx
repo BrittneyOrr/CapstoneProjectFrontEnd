@@ -1,116 +1,89 @@
-/*
-setup the account with ability to see the user's
-reviews, comments, edit those, and delete them. 
- */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserReviews from './UserReviews';
+// import { fetchUserReviews } from '../api';
+
+// Updated fetchUserReviews function as shown above
+
+export const fetchUserInfo = async (userId) => {
+  // Mock implementation for demonstration purposes
+  return Promise.resolve({
+    id: userId,
+    name: '',
+    email: '',
+  });
+};
 
 const Account = () => {
-  // State for user reviews, comments, loading, and form data
   const [userReviews, setUserReviews] = useState([]);
-  const [userComments, setUserComments] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [editedReview, setEditedReview] = useState('');
   const [editedRating, setEditedRating] = useState(0);
+  const { userId } = useParams(); // Assuming you have a userId parameter in the route
+  const navigate = useNavigate();
 
-  // Fetch user reviews and comments on component mount
-//   useEffect(() => {
-//     const fetchUserReviewsAndComments = async () => {
-//       try {
-//         const responseReviews = await fetch('/api/reviews'); // Endpoint to fetch reviews
-//         const dataReviews = await responseReviews.json();
-//         setUserReviews(dataReviews);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const reviews = await fetchUserReviews(userId);
+        setUserReviews(reviews);
+        const info = await fetchUserInfo(userId);
+        setUserInfo(info);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-//         const responseComments = await fetch('/api/comments'); // Endpoint to fetch comments
-//         const dataComments = await responseComments.json();
-//         setUserComments(dataComments);
+    fetchData();
+  }, [userId]); // Include userId in the dependency array
 
-//         setLoading(false);
-//       } catch (error) {
-//         console.error('Error fetching reviews and comments:', error);
-//       }
-//     };
+  const handleEditReview = (id) => {
+    // Logic to handle editing the review
+    navigate(`/edit-review/${id}`); // Assuming you have a route for editing reviews
+  };
 
-//     fetchUserReviewsAndComments();
-//   }, []);
+  const handleDeleteReview = (id) => {
+    // Logic to handle deleting the review
+    setUserReviews(userReviews.filter((review) => review.id !== id));
+  };
 
-  // Handle editing a review
-//   const handleEditReview = async (reviewId, newReview, newRating) => {
-//     try {
-//       const response = await fetch(`/api/reviews/${reviewId}`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ review: newReview, rating: newRating }),
-//       });
-//       if (!response.ok) throw new Error('Error updating review');
-//       // Update the userReviews state with the updated review
-//       const updatedReviews = userReviews.map((review) =>
-//         review.id === reviewId ? { ...review, review: newReview, rating: newRating } : review
-//       );
-//       setUserReviews(updatedReviews);
-//       setEditedReview('');
-//       setEditedRating(0);
-//     } catch (error) {
-//       console.error('Error updating review:', error);
-//     }
-//   };
-
-  // Render the Account component UI
   return (
     <div style={{ textAlign: 'center' }}>
-    <h1 style={{ marginBottom: '50px' }}>Your Account</h1>
-    <h1>Your Reviews</h1>
-        <Reviews />
+      <h1 style={{ marginBottom: '20px' }}>Your Account</h1>
+      {loading ? (
+        <p>Loading user information...</p>
+      ) : (
+        <div>
+          <p>
+            <strong>Name:</strong> {userInfo.name}
+          </p>
+          <p>
+            <strong>Email:</strong> {userInfo.email}
+          </p>
         </div>
-    // //   <ul>
-    // //     {userReviews.map((review) => (
-    //       <li key={review.id}>
-    //         <div>
-    //           <strong>Movie:</strong> {review.movie_id} {/* Assuming movie_id is present in the review data */}
-    //         </div>
-    //         <div>
-    //           <strong>Review:</strong> {review.review}
-    //         </div>
-    //         {/* Display the current rating and allow editing */}
-    //         <div>
-    //           <strong>Rating:</strong> 
-    //           {[...Array(5)].map((_, index) => (
-    //             <span 
-    //                 key={index}
-    //                 style={{ cursor: 'pointer' }}
-    //                 onClick={() => setEditedRating(index + 1)}
-    //             >
-    //                 {index < editedRating ? '★' : '☆'}
-    //             </span>
-    //           ))}
-    //         </div>
-    //         {/* Include edit and delete buttons for reviews */}
-    //         <button onClick={() => handleEditReview(review.id, editedReview, editedRating)}>Edit Review</button>
-    //         {/* Implement delete review functionality here */}
-    //       </li>
-    //     ))}
-    //   </ul>
-
-//       {/* Render the ReviewForm component for editing reviews */}
-//       <fieldset className="ReviewForm" style={{ backgroundColor: '#222', padding: '20px', marginTop: '20px', color: 'white', textAlign: 'left' }}>
-//       <h2>Edit Your Review</h2>
-//   <form onSubmit={(e) => e.preventDefault()}>
-//     <div className="form-group">
-//       <textarea
-//         value={editedReview}
-//         onChange={(e) => setEditedReview(e.target.value)}
-//         className="form-control"
-//         rows="3"
-//         placeholder="Edit your review..."
-//         style={{ marginBottom: '10px', width: '100%' }}
-//         required
-//       />
-//     </div>
-//     <button onClick={() => handleEditReview(review.id, editedReview, editedRating)} className="btn btn-primary">Update Review</button>
-//   </form>
-// </fieldset>
-//     // </div>
+      )}
+      <h1 style={{ marginTop: '50px' }}>Your Reviews</h1>
+      {loading ? (
+        <p>Loading reviews...</p>
+      ) : (
+        <ul>
+          {userReviews.map((review) => (
+            <li key={review.id}>
+              {/* Render review details */}
+              <p>{review.review}</p>
+              <p>Rating: {review.rating}</p>
+              <img src={review.poster} alt="Movie Poster" style={{ maxWidth: '200px', maxHeight: '300px' }} />
+              {/* Edit and delete buttons */}
+              <button onClick={() => handleEditReview(review.id)}>Edit</button>
+              <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* Render the ReviewForm component for editing reviews */}
+    </div>
   );
 };
 

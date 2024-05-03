@@ -1,11 +1,10 @@
 // setup the API CRUD to pull movies
-// is this needed? -> const API_URL = 'https://';
 //DO WE NEED TO DEPLOY TO GET OUR BASE URL?
 // const API_URL = "https://localhost:5432";
 
 export const getAllMovies = async () => {
     try {
-        const result = await fetch('http://localhost:3000/api/movies');
+        const result = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/movies');
         if (!result.ok) {
             throw new Error('Failed to fetch movies');
         }
@@ -19,7 +18,7 @@ export const getAllMovies = async () => {
 };
 export const login = async (username, password) => {
 try{
-    const response = await fetch('http://localhost:3000/api/users/login', {
+    const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -66,7 +65,7 @@ try{
 
     export const fetchMovie = async (movieId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/movies/${movieId}`);
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/movies/${movieId}`);
             if (!result.ok) {
                 throw new Error('Failed to fetch movie');
             }
@@ -81,12 +80,13 @@ try{
     
     export const fetchMovieReviews = async (movieId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/reviews/${movieId}`);
-            if (!result.ok) {
-                throw new Error('Failed to fetch reviews');
-            }
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${movieId}`);
+            // if (!result.ok) {
+            //     throw new Error('Failed to fetch reviews');
+            // }
             const response = await result.json();
-            return response.reviews;
+           
+            return response;
         } catch (error) {
             console.log(error);
             throw new Error("Failed to fetch reviews");
@@ -95,7 +95,7 @@ try{
 
     export const fetchUserReviews = async (userId) => {
         try {
-            const result = await fetch(`http://localhost:3000/api/reviews/${userId}`);
+            const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${userId}`);
             if (!result.ok) {
                 throw new Error('Failed to fetch review');
             }
@@ -134,3 +134,43 @@ try{
     //         throw new Error("Failed to fetch comment");
     //     }
     // }
+
+    export async function register(userData) {
+        try {
+            const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to register');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    export const submitReview = async (reviewData) => {
+        try {
+                // await fetch('https://localhost:3000/api/reviews', {
+        //     // Example: Make an API request to submit review data to the server
+
+
+            const response = await fetch('https://capstoneprojectbackend-ywy6.onrender.com/api/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reviewData),
+            });
+            // if (!response.ok) {
+            //     throw new Error('Failed to register');
+            // }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
