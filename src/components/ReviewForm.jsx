@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import StarRating from './StarRating';
-import { submitReview } from '../api';
+import { submitReview, fetchMovieReviews } from '../api';
 
-const ReviewForm = ({ movieId, userId }) => {
+const ReviewForm = ({ movieId, userId, setReviews }) => {
     const [rating, setRating] = useState('');
     const [comment, setComment] = useState('');
 
@@ -24,6 +24,8 @@ const ReviewForm = ({ movieId, userId }) => {
     console.log(reviewData);
             setRating('');
             setComment('');
+            const updatedReviews = await fetchMovieReviews(movieId);
+            setReviews(updatedReviews);
         } catch (error) {
     //         // Handle errors if submission fails
             console.error('Error submitting review:', error);

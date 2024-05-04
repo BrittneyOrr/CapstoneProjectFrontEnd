@@ -22,6 +22,7 @@ export default function Login({ setToken }) {
           // clear form after submission
                 const response = await login(username, password);
                 console.log(response);
+                if ('token' in response) {
                 const { token } = response;
                 setToken(token);
                 // localStorage.setItem('token', token); 
@@ -30,8 +31,12 @@ export default function Login({ setToken }) {
                 if(response.message === 'Login success~'){
                     navigate('/');
                 }
-            }catch(err){
+            } else {
+                setError('Invalid username or password');
+            }
+            } catch(err){
                 console.log(err);
+                setError('An error occurred while logging in');
             }
           
         };
@@ -71,7 +76,7 @@ return (
                       </div>
 
                       <button type="submit" className="btn btn-primary">Login</button>
-
+                      {error && <p className="text-danger">{error}</p>}
                   </form>
 
               </div>
