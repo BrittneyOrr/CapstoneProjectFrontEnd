@@ -7,8 +7,8 @@ import ReviewForm from './ReviewForm';
 const SingleMovie = ({ token }) => {
     const [movie, setMovie] = useState(null);
     const [reviews, setReviews] = useState([]);
-    const navigate = useNavigate();
-    const { movieId, userId } = useParams();
+    const navigate = useNavigate(); 
+    const { movieId } = useParams();
 
     useEffect(() => {
         async function fetchMovieData() {
@@ -17,7 +17,11 @@ const SingleMovie = ({ token }) => {
                 setMovie(movieData);
                 
                 const reviewsData = await fetchMovieReviews(movieId);
-                setReviews(reviewsData || []);
+                if (Array.isArray(reviewsData)) {
+                    setReviews(reviewsData);
+                } else {
+                    setReviews([]); // Set to empty array if reviewsData is not an array
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 setReviews([]);
@@ -34,7 +38,7 @@ const SingleMovie = ({ token }) => {
             <div className="black-background" style={{ backgroundColor: '#222' }}>
                 <div className="container py-4">
                     <h2 className="my-4 text-light" style={{ color: 'cyan' }}>About This Movie</h2>
-                    {movie ? (
+                    {movie && reviews.length > 0 ? ( // Check if movie and reviews are available
                         <div className="row">
                             <div className="col-md-4">
                                 <img src={movie.poster_url} alt={movie.title} className="img-fluid shadow-lg rounded" />
@@ -51,7 +55,28 @@ const SingleMovie = ({ token }) => {
                                         {token ? <ReviewForm movieId={movieId} userId={userId} /> : null}
                                         <p> </p>
                                         <h3 className="text-light">Reviews for {movie.title}</h3>
-                                        {/* Reviews section should be here */}
+                                        <div className='black-background'>
+                                            <div className='container'>
+                                                <div className="row row-cols-1 row-cols-md-3 g-4">
+                                                    {reviews.map((review) => {
+                                                        const { comment, rating, review_date, userId, id } = review; // Destructure from each individual review object
+                                                        return (
+                                                            <div key={id} className="col">
+                                                                <div className="card h-100" style={{ backgroundColor: '#333', color: 'white' }}>
+                                                                    <div className="card-body p-2">
+                                                                        <h5 className="card-title" style={{ color: 'cyan' }}>{rating}</h5>
+                                                                        <p className="card-text"><strong style={{ color: 'yellow' }}>Comment:</strong> {comment}</p>
+                                                                        <p className="card-text"><strong style={{ color: 'orange' }}>Review Date:</strong> {review_date}</p>
+                                                                        {/* Integrate the StarRating component here */}
+                                                                        <div> {/* StarRating component */}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -66,5 +91,6 @@ const SingleMovie = ({ token }) => {
 };
 
 export default SingleMovie;
+
 
 // <p><i className="fas fa-star" style={{ color: 'yellow' }}></i> Average Rating: <span style={{ color: 'yellow' }}>{calculateAverageRating()}</span></p>
