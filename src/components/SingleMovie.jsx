@@ -53,7 +53,8 @@ const SingleMovie = ({ token }) => {
                                         <p><i className="fas fa-align-left" style={{ color: 'cyan' }}></i> Movie Plot: <span style={{ color: 'cyan' }}>{movie.plot}</span></p>
                                     </div>
                                     <div className="card-footer">
-                                        {token ? <ReviewForm movieId={movieId} userId={userId} /> : null}
+                                        {token ? <ReviewForm movieId={movieId} userId={userId} setReviews={setReviews} />
+                                        : null}
                                         <p> </p>
                                         <h3 className="text-light">Reviews for {movie.title}</h3>
                                         <div className='black-background'>
