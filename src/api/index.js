@@ -99,6 +99,25 @@ export const fetchMovieReviews = async (movieId) => {
   }
 };
 
+export const fetchUserData = async (userId) => {
+  try {
+    const result = await fetch(
+      `https://capstoneprojectbackend-ywy6.onrender.com/api/users/${userId}`
+    );
+    if (!result.ok) {
+      throw new Error("Failed to fetch user data");
+    }
+    const userData = await result.json();
+    // Assuming the API response contains user data like username and email
+    const { username, email } = userData;
+    return { username, email };
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+    throw new Error("Failed to fetch user data");
+  }
+};
+
+
 export const fetchUserReviews = async (userId) => {
   try {
     const result = await fetch(
