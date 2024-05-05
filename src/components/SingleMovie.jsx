@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchMovie, fetchMovieReviews } from '../api';
 import ReviewForm from './ReviewForm';
 
-const SingleMovie = ({ token }) => {
+const SingleMovie = ({ token, userId }) => {
     const [movie, setMovie] = useState(null);
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate(); 
-    const { movieId, userId } = useParams();
+    const { movieId } = useParams();
 
     useEffect(() => {
         async function fetchMovieData() {
@@ -78,7 +78,7 @@ const SingleMovie = ({ token }) => {
                                                                 // Render the review normally
                                                                 const { comment, rating, review_date, userId, id } = review;
                                                                 return (
-                                                                    <div key={id} className="col">
+                                                                    <div key={review.id} className="col">
                                                                         <div className="card h-100">
                                                                             <div className="card-body">
                                                                                 <h5 className="card-title">{rating}</h5>
