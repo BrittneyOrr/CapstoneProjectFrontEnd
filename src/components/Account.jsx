@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import UserReviews from './UserReviews';
-// import { fetchUserReviews } from '../api';
+import UserReviews from './UserReviews'; 
 
-// Updated fetchUserReviews function as shown above
 
-export const fetchUserInfo = async (userId) => {
-  // Mock implementation for demonstration purposes
-  return Promise.resolve({
-    id: userId,
-    name: '',
-    email: '',
-  });
+const fetchUserData = async (userId) => {
+  try {
+
+    const userInfo = { userId, username: '', email: '' };
+    return userInfo;
+  } catch (error) {
+    throw new Error('Error fetching user data:', error);
+  }
 };
 
 const Account = () => {
   const [userReviews, setUserReviews] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
-  const [editedReview, setEditedReview] = useState('');
-  const [editedRating, setEditedRating] = useState(0);
-  const { userId } = useParams(); // Assuming you have a userId parameter in the route
+  const { userId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const reviews = await fetchUserReviews(userId);
-        setUserReviews(reviews);
-        const info = await fetchUserInfo(userId);
+        // Fetch user information
+        const info = await fetchUserData(userId); 
         setUserInfo(info);
+
+        
+        const reviews = [];
+        setUserReviews(reviews);
+        
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -37,34 +38,28 @@ const Account = () => {
     };
 
     fetchData();
-  }, [userId]); // Include userId in the dependency array
+  }, [userId]); 
 
   const handleEditReview = (id) => {
-    // Logic to handle editing the review
-    navigate(`/edit-review/${id}`); // Assuming you have a route for editing reviews
+    
+    navigate(`/edit-review/${id}`); 
   };
 
-  const handleDeleteReview = (id) => {
-    // Logic to handle deleting the review
-    setUserReviews(userReviews.filter((review) => review.id !== id));
+  const handleDeleteReview = async (id) => {
+    try {
+      
+      setUserReviews(userReviews.filter((review) => review.id !== id));
+    } catch (error) {
+      console.error('Error deleting review:', error);
+    }
   };
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1 style={{ marginBottom: '20px' }}>Your Account</h1>
-      {loading ? (
-        <p>Loading user information...</p>
-      ) : (
-        <div>
-          <p>
-            <strong>Name:</strong> {userInfo.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {userInfo.email}
-          </p>
-        </div>
-      )}
-      <h1 style={{ marginTop: '50px' }}>Your Reviews</h1>
+      <h1 style={{ marginTop: '80px'}}>Your Account </h1>
+      <h3>{userInfo.username}</h3> {/* Display user name */}
+      <h3>{userInfo.email}</h3> {/* Display user email */}
+      <h1 style={{ marginTop: '100px' }}>Your Reviews</h1>
       {loading ? (
         <p>Loading reviews...</p>
       ) : (
