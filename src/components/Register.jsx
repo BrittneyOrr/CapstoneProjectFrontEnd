@@ -36,7 +36,14 @@ export default function RegisterUser({setUserId}) {
         }
     };
     return (
+      <div className="container-fluid" style={{ paddingTop: "37px" }}>
         <div className="black-background">
+          <div className="container mt-5">
+            <h1 className="text-center text-white mb-4">Reel Rave</h1>
+            <h2 className="text-center mb-4" style={{ color: "cyan" }}>
+              Create an Account to Rate or Review
+            </h2>
+
 
             <div className="container mt-5">
 
@@ -85,6 +92,8 @@ export default function RegisterUser({setUserId}) {
 
                 </form>
             </div>
+            
         </div>
+      </div>
     );
 }
