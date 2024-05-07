@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../api';
 
-export default function RegisterUser(user) {
+export default function RegisterUser({setUserId}) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,6 +27,7 @@ export default function RegisterUser(user) {
             // localStorage.setItem('token', token); 
             setUsername('');
             setPassword('');
+            setUserId('');
             setIsLoading(false);
             navigate('/login');
         } catch (error) {

@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+// App.jsx
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import "./index.css";
@@ -11,9 +11,11 @@ import Account from "./components/Account";
 
 function App() {
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   return (
-    <>
+    
+    <div>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="navbar-brand" to="/">
@@ -69,16 +71,15 @@ function App() {
       <div>
         <Routes>
 
-          <Route path='/' element={<Movies />} />
-          <Route path='/api/movies/:movieId' element={<SingleMovie token={token} />} />
-          <Route path='/movies/:movieId/user/:userId' element={<SingleMovie token={token} />} />
-          <Route path='/login' element={<Login setToken={setToken} />} />
-          <Route path='/register' element={<Register setToken={setToken} />} />
-          <Route path='/users/me' element={<Account token={token} />} />
+          <Route path='/' element={<Movies userId={userId} />} />
+          <Route path='/api/movies/:movieId' element={<SingleMovie token={token} userId={userId} />} />
+          <Route path='/login' element={<Login setToken={setToken} setUserId={setUserId} userId={userId} />} />
+          <Route path='/register' element={<Register setToken={setToken} setUserId={setUserId} />} />
+          <Route path='/users/me' element={<Account token={token} userId={userId} />} />
 
         </Routes>
       </div>
-    </>
+      </div>
   );
 }
 
