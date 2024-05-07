@@ -6,20 +6,21 @@ export default function MovieReviews () {
     const [movieReviews, setMovieReviews] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const { movieId } = useParams();
 
     useEffect(() => {
         async function getMovieReviewsHandler() {
             try {
-                const MovieReviewData = await fetchMovieReviews();
-                setReviews(MovieReviewData);
+                const MovieReviewData = await fetchMovieReviews(movieId);
+                setMovieReviews(MovieReviewData);
                 setIsLoading(false);
             } catch (error) {
                 setError(error);
                 setIsLoading(false);
             }
         }
-        getAllReviewsHandler();
-    }, []);
+        getMovieReviewsHandler();
+    }, [movieId]);
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -30,7 +31,7 @@ export default function MovieReviews () {
         <div className='black-background'>
             <div className='container'>
                 <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {reviews.map((review) => {
+                    {movieReviews.map((review, index) => {
                         const { movie_id, rating, comment, review_date } = review;
                         return (
                             <div key={index} className="col">

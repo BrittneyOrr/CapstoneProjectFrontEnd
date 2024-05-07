@@ -6,11 +6,12 @@ export default function UserReviews () {
     const [userReviews, setUserReviews] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const { userId } = useParams();
 
     useEffect(() => {
         async function getUserReviewsHandler() {
             try {
-                const UserReviewData = await fetchUserReviews();
+                const UserReviewData = await fetchUserReviews(userId);
                 setUserReviews(UserReviewData);
                 setIsLoading(false);
             } catch (error) {
@@ -19,7 +20,7 @@ export default function UserReviews () {
             }
         }
         getUserReviewsHandler();
-    }, []);
+    }, [userId]);
 
     if (isLoading) {
         return <p>Loading...</p>;

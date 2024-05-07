@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+// App.jsx
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,39 +12,74 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const [token, setToken] = useState(null);
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-
-  // Function to handle toggling of the navbar menu
-  const toggleMenu = () => {
-    const navbarMenu = document.querySelector(".navbar-collapse");
-    navbarMenu.classList.toggle("active");
-  };
-  const handleLogout = () => {
-    // Set token to null or perform any other logout logic
-    setLoggedIn(false);
-    console.log(token);
-  };
+  const [userId, setUserId] = useState(null);
 
   return (
-    <>
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+    
+    <div>
+      <div className="container">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" to="/">
+            {/* <div className="logo-container"> */}
+              <img
+                src="../public/ReelRaveLogo.png"
+                alt="Website Logo"
+                className="logo"
+              />
+            {/* </div> */}
+            Movies
+          </Link>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            {token ? (
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/users/me">
+                    Account
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Sign In
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Create Account
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </div>
+        </nav>
+      </div>
+
       <div>
         <Routes>
-          <Route path="/" element={<Movies />} />
-          <Route
-            path="/api/movies/:movieId"
-            element={<SingleMovie token={setToken} />}
-          />
-          <Route path="/login" element={<Login setToken={setToken} />} />
-          <Route path="/register" element={<Register setToken={setToken} />} />
-          <Route
-            path="/users/me"
-            element={<Account token={token} userInfo={userInfo} />}
-          />
+
+          <Route path='/' element={<Movies userId={userId} />} />
+          <Route path='/api/movies/:movieId' element={<SingleMovie token={token} userId={userId} />} />
+          <Route path='/login' element={<Login setToken={setToken} setUserId={setUserId} userId={userId} />} />
+          <Route path='/register' element={<Register setToken={setToken} setUserId={setUserId} />} />
+          <Route path='/users/me' element={<Account token={token} userId={userId} />} />
         </Routes>
       </div>
-    </>
+      </div>
   );
 }
 export default App;

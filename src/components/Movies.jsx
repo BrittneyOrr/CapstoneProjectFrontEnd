@@ -78,66 +78,94 @@ export default function AllMovies() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-        <div className="black-background">
-          <div className="container">
-            <div className="row row-cols-1 row-cols-md-3 g-4">
-              {filteredMovies.map((movie) => {
-                const {
-                  id,
-                  title,
-                  poster_url,
-                  category,
-                  release_date,
-                  reviews
-                } = movie;
-                return (
-                  <div key={id} className="col">
-                    <div
-                      className="card h-100"
-                      style={{ backgroundColor: "#333", color: "white" }}
-                    >
-                      <img
-                        src={poster_url}
-                        alt={title}
-                        className="card-img-top img-fluid"
-                        style={{ maxHeight: "300px" }}
-                      />
-                      <div className="card-body p-2">
-                        <h5 className="card-title" style={{ color: "cyan" }}>
-                          {title}
-                        </h5>
-                        <p className="card-text">
-                          <strong style={{ color: "yellow" }}>Category:</strong>{" "}
-                          {category}
-                        </p>
-                        <p className="card-text">
-                          <strong style={{ color: "orange" }}>
-                            Release Date:
-                          </strong>{" "}
-                          {release_date}
-                        </p>
-                        {/* Integrate the StarRating component here */}
-                        <div className="card-text">
-                          <strong style={{ color: "green" }}>
-                            Average Rating:
-                          </strong>{" "}
-                          <StarRating
-                            value={calculateAverageRating(reviews)}
-                            onChange={handleRatingChange}
-                          />
-                        </div>
-                      </div>
-                      <div className="card-footer p-2">
-                        <button
-                          onClick={() => navigate(`/api/movies/${id}`)}
-                          className="btn btn-primary btn-sm"
-                          style={{ backgroundColor: "purple" }}
-                        >
-                          See Details
-                        </button>
-                      </div>
+// <<<<<<< brittney-new
+            <div className='black-background'>
+                <div className='container'>
+                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                        {filteredMovies.map((movie) => {
+                            const { id, title, poster_url, category, release_date, reviews } = movie;
+                            return (
+                                <div key={id} className="col">
+                                    <div className="card h-100" style={{ backgroundColor: '#333', color: 'white' }}>
+                                        <img src={poster_url} alt={title} className="card-img-top img-fluid" style={{ maxHeight: '300px' }} />
+                                        <div className="card-body p-2">
+                                            <h5 className="card-title" style={{ color: 'cyan' }}>{title}</h5>
+                                            <p className="card-text"><strong style={{ color: 'yellow' }}>Category:</strong> {category}</p>
+                                            <p className="card-text"><strong style={{ color: 'orange' }}>Release Date:</strong> {release_date}</p>
+                                            {/* Integrate the StarRating component here */}
+                                            <div>
+                                                <strong style={{ color: 'green' }}>Average Rating:</strong> <StarRating value={calculateAverageRating(reviews)} onChange={handleRatingChange} />
+                                            </div>
+                                        </div>
+                                        <div className="card-footer p-2">
+                                            <button onClick={() => navigate(`/api/movies/${id}`)} className='btn btn-primary btn-sm' style={{ backgroundColor: 'purple' }}>See Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+// // =======
+//           </div>
+//         </div>
+//         <div className="black-background">
+//           <div className="container">
+//             <div className="row row-cols-1 row-cols-md-3 g-4">
+//               {filteredMovies.map((movie) => {
+//                 const {
+//                   id,
+//                   title,
+//                   poster_url,
+//                   category,
+//                   release_date,
+//                   reviews
+//                 } = movie;
+//                 return (
+//                   <div key={id} className="col">
+//                     <div
+//                       className="card h-100"
+//                       style={{ backgroundColor: "#333", color: "white" }}
+//                     >
+//                       <img
+//                         src={poster_url}
+//                         alt={title}
+//                         className="card-img-top img-fluid"
+//                         style={{ maxHeight: "300px" }}
+//                       />
+//                       <div className="card-body p-2">
+//                         <h5 className="card-title" style={{ color: "cyan" }}>
+//                           {title}
+//                         </h5>
+//                         <p className="card-text">
+//                           <strong style={{ color: "yellow" }}>Category:</strong>{" "}
+//                           {category}
+//                         </p>
+//                         <p className="card-text">
+//                           <strong style={{ color: "orange" }}>
+//                             Release Date:
+//                           </strong>{" "}
+//                           {release_date}
+//                         </p>
+//                         {/* Integrate the StarRating component here */}
+//                         <div className="card-text">
+//                           <strong style={{ color: "green" }}>
+//                             Average Rating:
+//                           </strong>{" "}
+//                           <StarRating
+//                             value={calculateAverageRating(reviews)}
+//                             onChange={handleRatingChange}
+//                           />
+//                         </div>
+//                       </div>
+//                       <div className="card-footer p-2">
+//                         <button
+//                           onClick={() => navigate(`/api/movies/${id}`)}
+//                           className="btn btn-primary btn-sm"
+//                           style={{ backgroundColor: "purple" }}
+//                         >
+//                           See Details
+//                         </button>
+//                       </div>
+// >>>>>>> pratik-latest
                     </div>
                   </div>
                 );

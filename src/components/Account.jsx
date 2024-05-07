@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import UserReviews from "./UserReviews";
+// <<<<<<< brittney-new
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import UserReviews from './UserReviews';
+// import { fetchUserReviews } from '../api';
+// =======
+// import React, { useState, useEffect } from "react";
+// import { useNavigate, useParams } from "react-router-dom";
+// import UserReviews from "./UserReviews";
+// >>>>>>> pratik-latest
 
 // Updated fetchUserReviews function as shown above
 
