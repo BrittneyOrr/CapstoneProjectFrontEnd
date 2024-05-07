@@ -26,6 +26,7 @@ try{
                     password
                 })
             });
+            console.log(response);
             return response.json();
 
 }catch(err){
@@ -81,14 +82,14 @@ try{
     export const fetchMovieReviews = async (movieId) => {
         try {
             const result = await fetch(`https://capstoneprojectbackend-ywy6.onrender.com/api/reviews/${movieId}`);
-            // if (!result.ok) {
-            //     throw new Error('Failed to fetch reviews');
-            // }
-            const response = await result.json();
+            if (!result.ok) {
+                throw new Error('Failed to fetch reviews');
+            }
+            const reviews = await result.json();
            
-            return response;
+            return reviews;
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching reviews', error);
             throw new Error("Failed to fetch reviews");
         }
     }
@@ -165,9 +166,9 @@ try{
                 },
                 body: JSON.stringify(reviewData),
             });
-            // if (!response.ok) {
-            //     throw new Error('Failed to register');
-            // }
+            if (!response.ok) {
+                throw new Error('Failed to submit review');
+            }
             const data = await response.json();
             return data;
         } catch (error) {

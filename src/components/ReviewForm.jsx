@@ -1,35 +1,35 @@
+// ReviewForm.jsx
 import { useState } from 'react';
 import StarRating from './StarRating';
-import { submitReview, fetchMovieReviews } from '../api';
 
-const ReviewForm = ({ movieId, userId, setReviews }) => {
-    const [rating, setRating] = useState('');
+const ReviewForm = ({ onReviewSubmit, movieId, userId }) => {
+    const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
+    // const { movieId, userId } = useParams();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Submit review data to backend
         const reviewData = {
-            movie_id: movieId,
+            movie_id: Number(movieId),
             user_id: userId,
             rating: rating,
             comment: comment,
             review_date: new Date().toISOString()
         };
         try {
-    //         // Call function to submit review data to server
-            await submitReview(reviewData);
+            // Call function to submit review data to server
+            await onReviewSubmit(reviewData);
+            console.log(reviewData);
             alert('Review submitted successfully!');
-    //         // Clear form fields after submission
-    console.log(reviewData);
-            setRating('');
+            // Clear form fields after submission
+            setRating(0);
             setComment('');
-            const updatedReviews = await fetchMovieReviews(movieId);
-            setReviews(updatedReviews);
         } catch (error) {
-    //         // Handle errors if submission fails
+            // Handle errors if submission fails
             console.error('Error submitting review:', error);
-    //         // Display an error message to the user
+            // Display an error message to the user
             alert('Failed to submit review. Please try again later.');
         }
     };
